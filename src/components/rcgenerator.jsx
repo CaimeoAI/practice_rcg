@@ -10,26 +10,55 @@ export default function RandomColorGenerator() {
         setSelection(selector)
     }
 
-    function generateColor(selector) {
-        if (selector === 'hex') {
-        } else if (selector === 'rgb') {
+    function generationUtility(length) {
+        return Math.floor(Math.random()*length)    
+    }
 
+    function generateColor(selector) {
+
+        console.log(selector)
+        if (selector === 'hex') {
+            const hex = [1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F'];
+            let hexColor = "#";
+
+            for (let i = 0; i < 6; i++) {
+                hexColor += hex[generationUtility(hex.length)]
+            }
+            console.log(hexColor)
+            setColorCode(hexColor)
         } else {
-            null
+            const r = generationUtility(256)
+            const g = generationUtility(256)
+            const b = generationUtility(256)
+            setColorCode("rgb("+r+","+g+","+b+")")
         }
     }
 
     return (
         <div className="container" style={{
-            background: {colorCode}
+            background: colorCode
         }}>
             <div className="button-container">
                 <button onClick={() => handleSelection('hex')}>HEX Color Code</button>
                 <button onClick={() => handleSelection('rgb')}>RGB Color Code</button>
                 <button 
-                    onClick={selection === 'hex' ? generateColor('hex') : generateColor('rgb')}>
+                    onClick={() => selection === 'hex' ? generateColor('hex') : generateColor('rgb')}>
                     Generate Random Color
                 </button>
+            </div>
+            <div className="text-wrapper">
+                {
+                    selection === 'hex' ?
+                    (<div className="text-container">
+                        <div className="text">HEX Color Code</div>
+                        <div className="text">{colorCode}</div>
+                    </div>)
+                    :
+                    (<div className="text-container">
+                        <div className="text">RGB Color Code</div>
+                        <div className="text">{colorCode}</div>
+                    </div>)
+                }
             </div>
         </div>
     )
