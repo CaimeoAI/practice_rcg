@@ -1,10 +1,10 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "../css/rcgenerator.css"
 
 export default function RandomColorGenerator() {
 
     const[selection, setSelection] = useState('hex')
-    const[colorCode, setColorCode] = useState('#000000')
+    const[colorCode, setColorCode] = useState('#ffffff')
 
     function handleSelection(selector) {
         setSelection(selector)
@@ -33,6 +33,11 @@ export default function RandomColorGenerator() {
             setColorCode("rgb("+r+","+g+","+b+")")
         }
     }
+
+    useEffect(() => {
+        if (selection === 'rgb') generateColor('rgb');
+        else generateColor('hex')
+    }, [selection])
 
     return (
         <div className="container" style={{
