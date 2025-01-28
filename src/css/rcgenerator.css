@@ -1,0 +1,24 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+}
+
+button {
+    margin: 20px;
+    padding: 10px;
+    border-radius: 2rem;
+    font-weight: bold;
+    font-size: 1rem;
+}
